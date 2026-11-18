@@ -49,6 +49,7 @@
     "start_period": "30s",
     "failures": 3,
     "max_restarts": 2,
+    "restart_window": "10m",
     "http": "http://{ip}:80/health",
     "instance": "whoami",
     "timeout": "3s",

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.9
+
+- `health.max_restarts` counts the in-place restarts within the new `health.restart_window` (default 10m),
+  not over the whole term. A workload that restarts itself now and then (a nightly restart, an upgrade)
+  spent a long term's budget a night at a time, and the third such blip gave the office up and moved a
+  healthy workload. A workload that keeps failing still gives up as before.
+
 ## v0.1.8
 
 - In-place upgrade: `pagurus reexec` (the unit's `ExecReload`) hands a running agent the unit's new

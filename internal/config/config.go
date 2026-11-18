@@ -205,8 +205,12 @@ type Health struct {
 	StartPeriod Duration `json:"start_period"`
 	// Failures: consecutive failed checks before an in-place restart.
 	Failures int `json:"failures"`
-	// MaxRestarts: in-place restarts before the leader gives the office up.
-	MaxRestarts int `json:"max_restarts"`
+	// MaxRestarts: in-place restarts within RestartWindow before the leader
+	// gives the office up. Older restarts are forgotten, so a workload that
+	// restarts itself now and then (Home Assistant's nightly restart, a core
+	// upgrade) does not end a term that has run for days.
+	MaxRestarts   int      `json:"max_restarts"`
+	RestartWindow Duration `json:"restart_window"`
 	// HTTP, if set, is fetched after the instance-state check. "{ip}" is
 	// replaced with the IPv4 address of Instance's first NIC.
 	HTTP     string   `json:"http"`
@@ -469,6 +473,7 @@ func (c *Config) applyDefaults() {
 	def(&c.Fence.UnverifiedWait, 2*c.Lease.TTL.D())
 	def(&c.Health.Interval, 5*time.Second)
 	def(&c.Health.StartPeriod, 30*time.Second)
+	def(&c.Health.RestartWindow, 10*time.Minute)
 	def(&c.Health.Timeout, 3*time.Second)
 	def(&c.Health.ReleaseBackoff, 2*time.Minute)
 	def(&c.Health.ReleaseBackoffMax, 30*time.Minute)

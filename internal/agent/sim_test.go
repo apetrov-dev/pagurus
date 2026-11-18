@@ -1427,3 +1427,37 @@ func TestPinToDeadTargetDoesNotBlockLiveMember(t *testing.T) {
 		t.Fatalf("rpi5 member state = %+v, want may-run (healthy)", got)
 	}
 }
+
+// max_restarts counts the restarts within restart_window, not over the term:
+// Home Assistant restarting itself each night spent the term's budget of two
+// in three days and moved HAOS between hosts (2026-11-16, 2026-11-18).
+func TestRestartBudgetIsPerWindow(t *testing.T) {
+	for _, tc := range []struct {
+		window   time.Duration
+		giveUpTo string
+	}{{3 * time.Second, ""}, {time.Hour, "dell"}} {
+		t.Run(tc.window.String(), func(t *testing.T) {
+			h := newHarness(t, func(c *config.Config) { c.Health.RestartWindow = config.Duration(tc.window) })
+			h.startAll()
+			h.waitRunning("asus", 10*time.Second)
+			for i := range 2 {
+				before := h.prepares("asus")
+				h.sim.set("asus", func(m *simMember) { m.unhealthy = true })
+				for deadline := time.Now().Add(10 * time.Second); h.prepares("asus") == before && h.leader() == "asus"; time.Sleep(20 * time.Millisecond) {
+					if time.Now().After(deadline) {
+						t.Fatalf("blip %d: asus neither restarted nor gave up", i)
+					}
+				}
+				h.sim.set("asus", func(m *simMember) { m.unhealthy = false })
+				if i == 0 {
+					time.Sleep(4 * time.Second) // past the short window
+				}
+			}
+			if tc.giveUpTo == "" {
+				h.holdOne("asus", 2*time.Second)
+			} else {
+				h.waitRunning(tc.giveUpTo, 20*time.Second)
+			}
+		})
+	}
+}

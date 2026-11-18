@@ -7,6 +7,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	"slices"
 	"strings"
 	"time"
 
@@ -194,12 +195,13 @@ type termState struct {
 // in-place exec (while supervise is parked between two ticks) can hand it
 // over.
 type superviseState struct {
-	Restarts    int    `json:"restarts"`
-	Failures    int    `json:"failures"`
-	Healthy     bool   `json:"healthy"`
-	EverHealthy bool   `json:"ever_healthy"`
-	Applied     string `json:"applied"`     // the refresh request this term has applied
-	AckPending  string `json:"ack_pending"` // a refresh to acknowledge once healthy
+	// Restarts: when this term restarted the workload, within the restart window.
+	Restarts    []time.Time `json:"restart_times"`
+	Failures    int         `json:"failures"`
+	Healthy     bool        `json:"healthy"`
+	EverHealthy bool        `json:"ever_healthy"`
+	Applied     string      `json:"applied"`     // the refresh request this term has applied
+	AckPending  string      `json:"ack_pending"` // a refresh to acknowledge once healthy
 	// NextRound: replication's next snapshot round.
 	NextRound time.Time `json:"next_round"`
 	StartedAt time.Time `json:"started_at"`
@@ -207,6 +209,13 @@ type superviseState struct {
 	// UnavailableSince: since when the health check has found the backend
 	// API unavailable (zero: it answers).
 	UnavailableSince time.Time `json:"unavailable_since"`
+}
+
+// restartBudgetSpent forgets restarts older than the window and reports
+// whether the ones left use up max_restarts.
+func (sv *superviseState) restartBudgetSpent(now time.Time, hc config.Health) bool {
+	sv.Restarts = slices.DeleteFunc(sv.Restarts, func(at time.Time) bool { return now.Sub(at) >= hc.RestartWindow.D() })
+	return len(sv.Restarts) >= hc.MaxRestarts
 }
 
 func (t *termState) giveUp(reason string, backoff time.Duration) {
@@ -798,15 +807,15 @@ func (t *termState) supervise(resumed bool) {
 				t.giveUp(err.Error(), 0)
 				return false
 			}
-			if sv.Restarts >= hc.MaxRestarts || notRetryable(err) {
+			if sv.restartBudgetSpent(a.now(), hc) || notRetryable(err) {
 				backoff, streak := a.releaseBackoff(sv.EverHealthy)
 				a.alerter.Alert("unhealthy", "workload does not start; giving the office up", "member", a.member, "err", err.Error(),
 					"backoff", backoff, "failed_terms", streak)
 				t.giveUp("start failed: "+err.Error(), backoff)
 				return false
 			}
-			sv.Restarts++
-			t.log.Warn("retrying the start", "attempt", sv.Restarts)
+			sv.Restarts = append(sv.Restarts, a.now())
+			t.log.Warn("retrying the start", "attempt", len(sv.Restarts))
 			if !sleep(t.op, hc.Interval.D()) {
 				return false
 			}
@@ -936,16 +945,16 @@ func (t *termState) supervise(resumed bool) {
 			if sv.Failures < hc.Failures {
 				break
 			}
-			if sv.Restarts >= hc.MaxRestarts {
+			if sv.restartBudgetSpent(a.now(), hc) {
 				backoff, streak := a.releaseBackoff(sv.EverHealthy)
 				a.alerter.Alert("unhealthy", "workload stays unhealthy; giving the office up", "member", a.member, "err", err.Error(),
 					"backoff", backoff, "failed_terms", streak)
 				t.giveUp("unhealthy: "+err.Error(), backoff)
 				return
 			}
-			sv.Restarts++
+			sv.Restarts = append(sv.Restarts, a.now())
 			sv.Failures = 0
-			t.log.Warn("restarting workload in place", "attempt", sv.Restarts)
+			t.log.Warn("restarting workload in place", "attempt", len(sv.Restarts))
 			if !startOnce() {
 				return
 			}
