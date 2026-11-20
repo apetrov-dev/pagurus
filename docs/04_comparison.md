@@ -30,6 +30,6 @@ check your version.
 - Each member's copy is pinned to that member (a project per member, pinned to a single-member
   cluster group), so "fence member M" means "nothing in M's project runs" — checkable through the
   cluster API from any member, which `pagurus audit` does once a second.
-- The election, lease and fencing deadline come from [conch](https://github.com/alien43/conch), a
+- The election, lease and fencing deadline come from [conch](https://github.com/apetrov-dev/conch), a
   small etcd lease tool with its own tests; pagurus owns the Incus side.
 - It needs nothing beyond the Incus cluster you already run and a three-node etcd.

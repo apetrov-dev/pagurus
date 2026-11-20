@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/backend"
-	"github.com/alien43/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/backend"
+	"github.com/apetrov-dev/pagurus/internal/config"
 )
 
 // The Incus cluster database stalls every API call for 90.0 s on some

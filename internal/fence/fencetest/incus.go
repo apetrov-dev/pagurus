@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/alien43/pagurus/internal/backend/incus"
+	"github.com/apetrov-dev/pagurus/internal/backend/incus"
 	"github.com/lxc/incus/v7/shared/api"
 )
 

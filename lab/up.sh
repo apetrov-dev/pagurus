@@ -49,7 +49,7 @@ if [ -n "${PAGURUS_BIN:-}" ]; then cp "$PAGURUS_BIN" "$bin/pagurus"; else
 if [ -n "${PAGURUS_TERM_BIN:-}" ]; then cp "$PAGURUS_TERM_BIN" "$bin/pagurus-term"; else
   CGO_ENABLED=0 go build -o "$bin/pagurus-term" ./cmd/pagurus-term; fi
 if [ -n "${CONCH_BIN:-}" ]; then cp "$CONCH_BIN" "$bin/conch"; else
-  log "building conch (the version pinned in go.mod)"; CGO_ENABLED=0 go build -o "$bin/conch" github.com/alien43/conch/cmd/conch; fi
+  log "building conch (the version pinned in go.mod)"; CGO_ENABLED=0 go build -o "$bin/conch" github.com/apetrov-dev/conch/cmd/conch; fi
 
 log "network $net ($LAB_SUBNET.0/24)"
 incus network create "$net" ipv4.address="$LAB_SUBNET.1/24" ipv4.nat=true ipv6.address=none >/dev/null

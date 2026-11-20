@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/fence"
-	"github.com/alien43/pagurus/internal/termshim"
+	"github.com/apetrov-dev/pagurus/internal/fence"
+	"github.com/apetrov-dev/pagurus/internal/termshim"
 )
 
 // The sim runs the real conch (the version pinned in go.mod, built here) for
@@ -57,7 +57,7 @@ func TestMain(m *testing.M) {
 		os.Exit(1)
 	}
 	conchBin = filepath.Join(dir, "conch")
-	if out, err := exec.Command("go", "build", "-o", conchBin, "github.com/alien43/conch/cmd/conch").CombinedOutput(); err != nil {
+	if out, err := exec.Command("go", "build", "-o", conchBin, "github.com/apetrov-dev/conch/cmd/conch").CombinedOutput(); err != nil {
 		fmt.Fprintf(os.Stderr, "building conch (pinned in go.mod): %v\n%s", err, out)
 		os.Exit(1)
 	}

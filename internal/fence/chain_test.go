@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/fence"
+	"github.com/apetrov-dev/pagurus/internal/fence"
 )
 
 // stub is a scripted fence for chain tests.

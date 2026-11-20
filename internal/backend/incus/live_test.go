@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/backend/incus"
+	"github.com/apetrov-dev/pagurus/internal/backend/incus"
 )
 
 // TestLiveClient exercises the real Incus client against a real cluster. It

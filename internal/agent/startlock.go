@@ -8,7 +8,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/alien43/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/config"
 )
 
 // hostStartLock takes the host-wide start lock at path: the agents of

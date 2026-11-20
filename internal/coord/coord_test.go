@@ -10,8 +10,8 @@ import (
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.etcd.io/etcd/client/v3/concurrency"
 
-	"github.com/alien43/pagurus/internal/coord"
-	"github.com/alien43/pagurus/internal/testutil"
+	"github.com/apetrov-dev/pagurus/internal/coord"
+	"github.com/apetrov-dev/pagurus/internal/testutil"
 )
 
 const prefix = "/pagurus/v2/svc"

@@ -29,8 +29,8 @@ import (
 
 	"golang.org/x/sys/unix"
 
-	"github.com/alien43/pagurus/internal/backend"
-	"github.com/alien43/pagurus/internal/qemuproc"
+	"github.com/apetrov-dev/pagurus/internal/backend"
+	"github.com/apetrov-dev/pagurus/internal/qemuproc"
 )
 
 // Instance and its statuses are the backend-neutral types, re-exported.

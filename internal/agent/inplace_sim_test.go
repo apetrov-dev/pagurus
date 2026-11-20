@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/coord"
+	"github.com/apetrov-dev/pagurus/internal/coord"
 )
 
 // reexec upgrades member's agent in place inside the test process, as

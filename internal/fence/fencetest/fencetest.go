@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/fence"
+	"github.com/apetrov-dev/pagurus/internal/fence"
 )
 
 // Bin is a fake binary: a shell script that appends its argv, one line per

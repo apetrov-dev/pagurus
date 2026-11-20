@@ -33,7 +33,7 @@ a service opts into replication (`02_replication.md`).
 One systemd unit per service and host runs the pagurus daemon (the unit's main process). The
 daemon keeps the local ground truth, and while this member is eligible it runs
 `conch elect <office> --fence 'pagurus fence-self …' --watchdog --campaign-after <rank × grace>
--- pagurus-term`. conch ([`docs/03_elect.md`](https://github.com/alien43/conch/blob/main/docs/03_elect.md)) owns the election, the lease, the lease's
+-- pagurus-term`. conch ([`docs/03_elect.md`](https://github.com/apetrov-dev/conch/blob/main/docs/03_elect.md)) owns the election, the lease, the lease's
 local validity bound, the fence before expiry, and the watchdog fitness of a term. When conch
 wins, its child `pagurus-term` hands the term (CONCH_REV, CONCH_LEASE) back to the daemon over a
 unix socket, and the daemon runs it in-process. `pagurus-term` is a separate binary that links only
@@ -81,7 +81,7 @@ re-checks every instance's `location` after every `up`.
    was deleted outside conch stops.
 
 2. **The leader stops itself before its lease can expire.** This is conch's guarantee
-   (conch [`docs/03_elect.md`](https://github.com/alien43/conch/blob/main/docs/03_elect.md) § Fencing). conch tracks `ValidUntil`: the send time of the newest renewal
+   (conch [`docs/03_elect.md`](https://github.com/apetrov-dev/conch/blob/main/docs/03_elect.md) § Fencing). conch tracks `ValidUntil`: the send time of the newest renewal
    that succeeded, plus the TTL, on this host's monotonic clock. etcd extends a lease from the
    moment it *receives* the renewal, so `ValidUntil` can never be later than the real expiry.
    conch's guardian starts the fence (`pagurus fence-self`) at loss detection, and at the
@@ -142,7 +142,7 @@ re-checks every instance's `location` after every `up`.
 5. **A wedged or unfit agent is not trusted.** systemd's watchdog is fed only while:
    - **conch runs:** conch's own pet is fresh. conch is fit while not holding, while holding
      with the fence's start deadline ahead and the term's heartbeat fresh, while a fence runs
-     within its budget, and never after a fence failed (conch [`docs/03_elect.md`](https://github.com/alien43/conch/blob/main/docs/03_elect.md) § Watchdog);
+     within its budget, and never after a fence failed (conch [`docs/03_elect.md`](https://github.com/apetrov-dev/conch/blob/main/docs/03_elect.md) § Watchdog);
    - **conch doesn't run:** cgroupfs shows nothing of ours running here (or briefly, while a
      stray copy or a dead term's remains are being stopped).
 

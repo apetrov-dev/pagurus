@@ -9,10 +9,10 @@ import (
 
 	clientv3 "go.etcd.io/etcd/client/v3"
 
-	"github.com/alien43/pagurus/internal/config"
-	"github.com/alien43/pagurus/internal/coord"
-	"github.com/alien43/pagurus/internal/fence"
-	"github.com/alien43/pagurus/internal/testutil"
+	"github.com/apetrov-dev/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/coord"
+	"github.com/apetrov-dev/pagurus/internal/fence"
+	"github.com/apetrov-dev/pagurus/internal/testutil"
 )
 
 const movePrefix = "/pagurus/v2/svc"

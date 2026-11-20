@@ -9,7 +9,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/alien43/pagurus/internal/backend"
+	"github.com/apetrov-dev/pagurus/internal/backend"
 )
 
 const (

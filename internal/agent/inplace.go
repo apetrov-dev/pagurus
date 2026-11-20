@@ -26,7 +26,7 @@ import (
 
 	"golang.org/x/sys/unix"
 
-	"github.com/alien43/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/config"
 )
 
 // handoverProtocol is the version of the handover: an agent re-execs only

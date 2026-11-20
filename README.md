@@ -1,8 +1,8 @@
 # pagurus — one copy of a service, failing over across an Incus cluster
 
-[![Go Test Status](https://github.com/alien43/pagurus/actions/workflows/test.yml/badge.svg)](https://github.com/alien43/pagurus/actions/workflows/test.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/alien43/pagurus.svg)](https://pkg.go.dev/github.com/alien43/pagurus)
-[![codecov](https://codecov.io/gh/alien43/pagurus/graph/badge.svg)](https://codecov.io/gh/alien43/pagurus)
+[![Go Test Status](https://github.com/apetrov-dev/pagurus/actions/workflows/test.yml/badge.svg)](https://github.com/apetrov-dev/pagurus/actions/workflows/test.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/apetrov-dev/pagurus.svg)](https://pkg.go.dev/github.com/apetrov-dev/pagurus)
+[![codecov](https://codecov.io/gh/apetrov-dev/pagurus/graph/badge.svg)](https://codecov.io/gh/apetrov-dev/pagurus)
 
 A hermit crab lives in one shell at a time and moves when it has to. `pagurus` keeps a container
 workload (an incus-compose stack, or plain Incus containers) running on **at most one** member of an
@@ -24,7 +24,7 @@ pagurus decides which one may run.
    project whoami-node1   whoami-node2   whoami-node3   (each pinned to its own member)
 ```
 
-The leader holds a lease in etcd ([conch](https://github.com/alien43/conch) runs the election).
+The leader holds a lease in etcd ([conch](https://github.com/apetrov-dev/conch) runs the election).
 Before its lease can expire it stops its copy; if its agent is gone, peers stop that copy through the
 Incus API, and an optional watchdog reboots a host whose agent wedges. The safety argument, and the
 gap it leaves, are in [`docs/00_design.md`](docs/00_design.md).
@@ -44,7 +44,7 @@ gap it leaves, are in [`docs/00_design.md`](docs/00_design.md).
 - An Incus cluster of ≥ 3 members (or 2 members plus an etcd member elsewhere as a witness), cgroup2,
   systemd.
 - etcd v3, three nodes.
-- [conch](https://github.com/alien43/conch) on `PATH` (the version in `go.mod`), and
+- [conch](https://github.com/apetrov-dev/conch) on `PATH` (the version in `go.mod`), and
   [incus-compose](https://github.com/lxc/incus-compose) for the compose starter.
 
 ## Try it
@@ -73,7 +73,7 @@ The same lab runs in CI on every push (`.github/workflows/lab.yml`).
 ## Status
 
 In production on the author's three-member cluster since October 2026 (stateless and replicated
-services). Releases: [GitHub releases](https://github.com/alien43/pagurus/releases) (static
+services). Releases: [GitHub releases](https://github.com/apetrov-dev/pagurus/releases) (static
 linux amd64/arm64; install `pagurus-term` next to `pagurus`). Interfaces may still change before 1.0; see [`CHANGELOG.md`](CHANGELOG.md).
 
 License: see [`LICENSE`](LICENSE). Security reports: [`SECURITY.md`](SECURITY.md).

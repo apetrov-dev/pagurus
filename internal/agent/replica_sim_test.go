@@ -11,10 +11,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/backend"
-	"github.com/alien43/pagurus/internal/config"
-	"github.com/alien43/pagurus/internal/coord"
-	"github.com/alien43/pagurus/internal/replica"
+	"github.com/apetrov-dev/pagurus/internal/backend"
+	"github.com/apetrov-dev/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/coord"
+	"github.com/apetrov-dev/pagurus/internal/replica"
 )
 
 // ------------------------------------------------------- simulated volumes -

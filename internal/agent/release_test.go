@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/config"
 )
 
 // A planned release stops the workload gracefully for stop_timeout (a VM

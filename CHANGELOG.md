@@ -100,7 +100,7 @@ First public release.
 
 - One agent per Incus cluster member (`pagurus run`, under systemd) keeps one copy of a service
   running on at most one member: per-member projects pinned to single-member cluster groups, the
-  office a [conch](https://github.com/alien43/conch) election on an etcd lease.
+  office a [conch](https://github.com/apetrov-dev/conch) election on an etcd lease.
 - Fencing: self-fence before the lease expires (stop, then `cgroup.kill`), startup fence, peer
   fence through the Incus API with `block` / `proceed` policies for an unverifiable member,
   `fence-ack` for the operator; watchdog modes `systemd` and `device`.

@@ -10,8 +10,8 @@ import (
 
 	clientv3 "go.etcd.io/etcd/client/v3"
 
-	"github.com/alien43/pagurus/internal/config"
-	"github.com/alien43/pagurus/internal/testutil"
+	"github.com/apetrov-dev/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/testutil"
 )
 
 func cfgWithEtcd(t *testing.T, etcd string) (*config.Config, error) {

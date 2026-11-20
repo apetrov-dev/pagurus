@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/alien43/pagurus/internal/qemuproc"
+	"github.com/apetrov-dev/pagurus/internal/qemuproc"
 	"golang.org/x/sys/unix"
 )
 

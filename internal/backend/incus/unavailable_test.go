@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/backend"
-	"github.com/alien43/pagurus/internal/backend/incus"
-	"github.com/alien43/pagurus/internal/fence/fencetest"
+	"github.com/apetrov-dev/pagurus/internal/backend"
+	"github.com/apetrov-dev/pagurus/internal/backend/incus"
+	"github.com/apetrov-dev/pagurus/internal/fence/fencetest"
 )
 
 // A read Incus does not answer is backend.ErrAPIUnavailable; one it answers

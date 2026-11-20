@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/config"
 )
 
 // waitPaused waits until member's start is paused in its slow phase.

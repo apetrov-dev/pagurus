@@ -1,4 +1,4 @@
-module github.com/alien43/pagurus
+module github.com/apetrov-dev/pagurus
 
 go 1.26.7
 
@@ -12,7 +12,7 @@ require (
 
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20240806141605-e8a1dd7889d6 // indirect
-	github.com/alien43/conch v0.6.0 // indirect
+	github.com/apetrov-dev/conch v0.6.2 // indirect
 	github.com/apex/log v1.9.0 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -72,4 +72,4 @@ require (
 	google.golang.org/protobuf v1.36.12 // indirect
 )
 
-tool github.com/alien43/conch/cmd/conch
+tool github.com/apetrov-dev/conch/cmd/conch

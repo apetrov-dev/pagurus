@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/fence"
-	"github.com/alien43/pagurus/internal/fence/fencetest"
+	"github.com/apetrov-dev/pagurus/internal/fence"
+	"github.com/apetrov-dev/pagurus/internal/fence/fencetest"
 )
 
 var vmTarget = fence.Target{Member: "asus", Project: "p-asus", Types: []string{"virtual-machine"}}

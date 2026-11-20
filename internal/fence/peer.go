@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/alien43/pagurus/internal/backend"
+	"github.com/apetrov-dev/pagurus/internal/backend"
 )
 
 // Peer fences are what a new leader does to another member that may still

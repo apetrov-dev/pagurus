@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/alien43/pagurus/internal/termshim"
+	"github.com/apetrov-dev/pagurus/internal/termshim"
 )
 
 var version = "dev"

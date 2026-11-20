@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/config"
+	"github.com/apetrov-dev/pagurus/internal/config"
 )
 
 func TestReleaseBackoffEscalatesAndResets(t *testing.T) {

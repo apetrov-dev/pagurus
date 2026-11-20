@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alien43/pagurus/internal/backend/incus"
-	"github.com/alien43/pagurus/internal/fence"
-	"github.com/alien43/pagurus/internal/fence/fencetest"
+	"github.com/apetrov-dev/pagurus/internal/backend/incus"
+	"github.com/apetrov-dev/pagurus/internal/fence"
+	"github.com/apetrov-dev/pagurus/internal/fence/fencetest"
 )
 
 // containerEnv: one container "web" of project p-asus in a FakeIncus whose

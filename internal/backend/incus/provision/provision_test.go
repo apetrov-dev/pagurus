@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/alien43/pagurus/internal/backend/incus"
-	"github.com/alien43/pagurus/internal/backend/incus/provision"
-	"github.com/alien43/pagurus/internal/fence/fencetest"
+	"github.com/apetrov-dev/pagurus/internal/backend/incus"
+	"github.com/apetrov-dev/pagurus/internal/backend/incus/provision"
+	"github.com/apetrov-dev/pagurus/internal/fence/fencetest"
 )
 
 var ctx = context.Background()
